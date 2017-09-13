@@ -16,6 +16,7 @@ import Log from './log';
 export default class Database {
 
   public model: object;
+  private keepClean: boolean; // 保持数据库干净
   private dbagent: Sequelize.Sequelize;
 
   /**
@@ -28,7 +29,9 @@ export default class Database {
     this.model = new Object();
 
     const {database} = config;
-    const {user, password, host, port, dbname, adapter} = database;
+    const {user, password, host, port, dbname, adapter, keepClean} = database;
+
+    this.keepClean = keepClean;
 
     const uri = `${adapter}://${user}:${password}@${host}:${port}/${dbname}`;
     this.dbagent = new Sequelize(uri, {logging: false});
@@ -60,7 +63,7 @@ export default class Database {
     const model = this.dbagent.define(tablename, attributes);
     this.model[tablename] = model;
 
-    await this.model[tablename].sync();
+    await this.model[tablename].sync({force: this.keepClean});
     Log.success(tablename, 'load');
   }
 

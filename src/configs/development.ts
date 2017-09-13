@@ -15,6 +15,7 @@ export default {
     dbname: 'aokihu',
     password: '',
     user: 'aokihu',
+    keepClean: true,
   },
   // HTTP 服务器配置
   http: {
