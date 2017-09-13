@@ -25,6 +25,9 @@
     "koa": "^2.3.0",
     "koa-bodyparser-ts": "^0.1.1",
     "koa-router": "^7.2.1",
-    "ramda": "^0.24.1"
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "ramda": "^0.24.1",
+    "sequelize": "^4.8.3"
   }
 }

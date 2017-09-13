@@ -23,6 +23,7 @@ const CONFIG = require(path.resolve(__dirname, 'configs', `${CURRENT_ENV}`)).def
 // TODO 启动HTTP服务器
 const httpServer: Koa = new Koa();
 
+// TODO 使用中间件
 httpServer.use(bodyParser());
 httpServer.use((ctx: Koa.Context, next) => {ctx.state.config = CONFIG; next(); });
 
