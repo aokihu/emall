@@ -57,14 +57,13 @@ export default class Database {
    * @param file 数据模型定义文件
    */
   public async loadModel(file: string): Promise<void> {
-    const definition = require(path.resolve(__dirname, '../', file)).default;
-    const {tablename, attributes} = definition;
+    const _filename = R.last(file.split('/'));
+    const tablename = _filename.split('.')[0];
 
-    const model = this.dbagent.define(tablename, attributes);
-    this.model[tablename] = model;
+    this.model[tablename] = this.dbagent.import(file);
 
     await this.model[tablename].sync({force: this.keepClean});
-    Log.success(tablename, 'load');
+    Log.success(tablename, 'loaded');
   }
 
   /**

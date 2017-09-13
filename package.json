@@ -8,9 +8,9 @@
     "type": "git"
   },
   "scripts": {
-    "start": "npm run build && npm test",
+    "test": "npm run build && npm start",
     "build": "./node_modules/.bin/tsc",
-    "test": "echo 'start...' && node ./build/main.js"
+    "start": "echo 'start...' && node ./build/main.js"
   },
   "author": "aokihu <aokihu@gmail.com>",
   "license": "MIT",

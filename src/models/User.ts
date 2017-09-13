@@ -1,9 +1,8 @@
 import * as Sequelize from 'sequelize';
 
-export default {
-  version: 1,
-  tablename: 'user',
-  attributes: {
+module.exports = (sequelize: Sequelize.Sequelize, dataTypes: Sequelize.DataTypes) => {
+
+  const USER = sequelize.define('user', {
      // * @prop name 用户名
     name: {
       type: Sequelize.STRING,
@@ -17,7 +16,7 @@ export default {
     },
     // * @props avatar 用户头像
     avatar: {
-      type: Sequelize.TEXT,
+      type: Sequelize.BLOB,
     },
     // * @props lastLogin 最后登陆时间
     lastLogin: {
@@ -27,5 +26,12 @@ export default {
     rights: {
       type: Sequelize.JSONB,
     },
-  },
+  });
+
+  // 定义<USER>与<ROLE>的关系
+  // ROLE has many USER
+  const ROLE = sequelize.import('./role');
+  ROLE.hasMany(USER);
+
+  return USER;
 };

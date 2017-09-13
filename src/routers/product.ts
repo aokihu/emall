@@ -9,7 +9,7 @@
  import * as Koa from 'koa';
  import * as Router from 'koa-router';
 
- const router: Router = new Router({prefix: '/product'});
+ const router: Router = new Router({prefix: '/v1/product'});
 
  /**
   * @api GET /product/

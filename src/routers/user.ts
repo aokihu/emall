@@ -67,7 +67,7 @@
 
   /**
    * @api PUT /user/:id 更改用户数据
-   * @param Request.password 用户的新密码 
+   * @param Request.password 用户的新密码
    */
   .put('/:id', async (ctx: Koa.Context, next) => {
     const {user} = ctx.state.db.model;
