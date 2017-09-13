@@ -10,9 +10,11 @@ export default {
   // 数据库配置
   database: {
     adapter: 'postgres',
-    dbname: 'emall',
-    password: 'abcd1234',
-    user: 'postgres',
+    host: 'localhost',
+    port: '5432',
+    dbname: 'aokihu',
+    password: '',
+    user: 'aokihu',
   },
   // HTTP 服务器配置
   http: {

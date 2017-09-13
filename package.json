@@ -8,6 +8,7 @@
     "type": "git"
   },
   "scripts": {
+    "start": "npm run build && npm test",
     "build": "./node_modules/.bin/tsc",
     "test": "echo 'start...' && node ./build/main.js"
   },
@@ -18,6 +19,7 @@
     "@types/koa-router": "^7.0.23",
     "@types/node": "^8.0.28",
     "@types/ramda": "^0.24.11",
+    "@types/sequelize": "^4.0.73",
     "tslint": "^5.7.0",
     "typescript": "^2.5.2"
   },

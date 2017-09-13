@@ -15,23 +15,36 @@ import * as path from 'path';
 import RouterAuthentication from './routers/authentication';
 import RouteCategory from './routers/category';
 import RouteProduct from './routers/product';
+import RouteUser from './routers/user';
+
+// TODO 加载数据模型
+import Database from './lib/database';
 
 // TODO 加载配置文件
 const CURRENT_ENV: string = process.env.NODE_ENV;
 const CONFIG = require(path.resolve(__dirname, 'configs', `${CURRENT_ENV}`)).default;
+
+// TODO 数据模型初始化
+const dbagent = new Database(CONFIG);
+dbagent.loadModelsFromFolder('./models');
 
 // TODO 启动HTTP服务器
 const httpServer: Koa = new Koa();
 
 // TODO 使用中间件
 httpServer.use(bodyParser());
-httpServer.use((ctx: Koa.Context, next) => {ctx.state.config = CONFIG; next(); });
+httpServer.use(async (ctx: Koa.Context, next) => {
+  ctx.state.config = CONFIG;
+  ctx.state.db = dbagent;
+  await next();
+});
 
 // TODO 加载路由
 httpServer
 .use(RouteCategory.routes())
 .use(RouterAuthentication.routes())
-.use(RouteProduct.routes());
+.use(RouteProduct.routes())
+.use(RouteUser.routes());
 
 // TODO 获取HTTP服务器配置信息
 const {http} = CONFIG;

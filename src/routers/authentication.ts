@@ -5,16 +5,24 @@
  * @version 1.0.0
  */
 
-import * as Router from 'koa-router';
+ import * as Koa from 'koa';
+ import * as Router from 'koa-router';
 
-const router: Router = new Router({prefix: '/auth'});
+ const router: Router = new Router({prefix: '/auth'});
 
 /**
  * @api POST /auth/login
  */
-router.post('/login', async (ctx) => {
+ router.post('/login', async (ctx: Koa.Context) => {
   ctx.type = 'json';
   ctx.body = ctx.request.body;
-});
+})
 
-export default router;
+/**
+ * @api GET /auth/logout
+ */
+.get('/logout', async (ctx: Koa.Context) => {
+
+} );
+
+ export default router;
