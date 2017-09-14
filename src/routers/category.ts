@@ -1,23 +1,6 @@
-/**
- * 
- */
+import RestRouter from '../lib/koa-rest-router';
 
- import * as Router from 'koa-router';
- const router: Router = new Router({prefix: '/category'});
+const modelName = 'category';
+const router = new RestRouter(modelName, {prefix: `/v1/${modelName}`});
 
- /**
-  * @api GET /category/
-  */
- router.get('/', async (ctx) => {
-    ctx.body = [
-      {title: 'hahaha'},
-    ];
- })
- /**
-  * @api GET /category/:id
-  */
- .get('/:id', async (ctx) => {
-  ctx.body = {id: ctx.params.id};
- });
-
- export default router;
+export default router;

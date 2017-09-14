@@ -12,10 +12,7 @@ import bodyParser from 'koa-bodyparser-ts';
 import * as path from 'path';
 
 // TODO 加载路由
-import RouterAuthentication from './routers/authentication';
-import RouteCategory from './routers/category';
-import RouteProduct from './routers/product';
-import RouteUser from './routers/user';
+import {loadRouters} from './lib/koa-rest-router';
 
 // TODO 加载数据模型
 import Database from './lib/database';
@@ -40,11 +37,7 @@ httpServer.use(async (ctx: Koa.Context, next) => {
 });
 
 // TODO 加载路由
-httpServer
-.use(RouteCategory.routes())
-.use(RouterAuthentication.routes())
-.use(RouteProduct.routes())
-.use(RouteUser.routes());
+loadRouters(httpServer, './routers');
 
 // TODO 获取HTTP服务器配置信息
 const {http} = CONFIG;
