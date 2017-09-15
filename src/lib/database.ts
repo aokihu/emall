@@ -53,20 +53,6 @@ export default class Database {
   }
 
   /**
-   * 加载数据定义文件
-   * @param file 数据模型定义文件
-   */
-  public async loadModel(file: string): Promise<void> {
-    const _filename = R.last(file.split('/'));
-    const tablename = _filename.split('.')[0];
-
-    this.model[tablename] = this.dbagent.import(file);
-
-    await this.model[tablename].sync({force: this.keepClean});
-    Log.success(tablename, 'loaded');
-  }
-
-  /**
    * 自动从数据模型定义的目录中加载所有的数据模型
    * @param folder 数据模型定义目录
    */
@@ -91,4 +77,17 @@ export default class Database {
 
   }
 
+  /**
+   * 加载数据定义文件
+   * @param file 数据模型定义文件
+   */
+  private async loadModel(file: string): Promise<void> {
+    const _filename = R.last(file.split('/'));
+    const tablename = _filename.split('.')[0];
+
+    this.model[tablename] = this.dbagent.import(file);
+
+    await this.model[tablename].sync({force: this.keepClean});
+    Log.success(tablename, 'model loaded');
+  }
 }
