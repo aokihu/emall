@@ -15,6 +15,7 @@ import * as path from 'path';
 import RouterAuthentication from './routers/authentication';
 import RouteCategory from './routers/category';
 import RouteProduct from './routers/product';
+import RouteRole from './routers/role';
 import RouteUser from './routers/user';
 
 // TODO 加载数据模型
@@ -44,7 +45,8 @@ httpServer
 .use(RouteCategory.routes())
 .use(RouterAuthentication.routes())
 .use(RouteProduct.routes())
-.use(RouteUser.routes());
+.use(RouteUser.routes())
+.use(RouteRole.routes());
 
 // TODO 获取HTTP服务器配置信息
 const {http} = CONFIG;
