@@ -9,6 +9,8 @@
 // TODO 引用第三方库
 import * as Koa from 'koa';
 import bodyParser from 'koa-bodyparser-ts';
+import * as mount from 'koa-mount';
+import * as server from 'koa-static';
 import * as path from 'path';
 
 // TODO 加载路由
@@ -41,6 +43,9 @@ loadRouters(httpServer, './routers');
 
 // TODO 获取HTTP服务器配置信息
 const {http} = CONFIG;
+
+// TODO 配置静态服务器
+httpServer.use(mount('/admin', server(path.resolve(__dirname, 'static', 'admin'))));
 
 // TODO HTTP服务器开始运行
 httpServer.listen(http.port);
